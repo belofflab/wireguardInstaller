@@ -11,12 +11,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Netherlands
-      - SERVERURL=auto #optional
-      - SERVERPORT=51820 #optional
-      - PEERS=10 #optional
-      - PEERDNS=auto #optional
-      - INTERNAL_SUBNET=10.13.13.0 #optional
-      - ALLOWEDIPS=0.0.0.0/0 #optional
+      - SERVERURL=auto
+      - SERVERPORT=51820
+      - PEERS=10
+      - PEERDNS=auto
+      - INTERNAL_SUBNET=10.13.13.0
+      - ALLOWEDIPS=0.0.0.0/0
     volumes:
       - ~/wireguard/config:/config
       - /lib/modules:/lib/modules

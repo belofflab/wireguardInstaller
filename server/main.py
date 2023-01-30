@@ -9,13 +9,11 @@ app = FastAPI()
 
 @app.get('/address/block')
 async def block_address(address: str):
-  subprocess.check_output(
-        f"docker exec -t wireguard iptables -A  INPUT s {address} -j DROP", shell=True)
+  subprocess.check_output(f"docker exec -t wireguard iptables -A INPUT -s {address} -j DROP", shell=True)
 
 @app.get('/address/allow')
 async def allow_address(address: str):
-  subprocess.check_output(
-        f"docker exec -t wireguard iptables -A  INPUT s {address} -j ACCEPT", shell=True)
+  subprocess.check_output(f"docker exec -t wireguard iptables -A INPUT -s {address} -j ACCEPT", shell=True)
 
 @app.get('/configs')
 async def get_configs():

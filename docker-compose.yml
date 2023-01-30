@@ -1,27 +1,27 @@
-version: "3"
+version: '3'
 
 services:
-  wg:
-    build: .
-    image: ngoduykhanh/wireguard-ui:latest
-    container_name: wgui
+  wireguard:
+    image: lscr.io/linuxserver/wireguard
+    container_name: wireguard
     cap_add:
       - NET_ADMIN
-    network_mode: host
+      - SYS_MODULE
     environment:
-      - SENDGRID_API_KEY
-      - EMAIL_FROM_ADDRESS
-      - EMAIL_FROM_NAME
-      - SESSION_SECRET
-      - WGUI_USERNAME=alpha
-      - WGUI_PASSWORD=this-unusual-password
-      - WG_CONF_TEMPLATE
-      - WGUI_MANAGE_START=false
-      - WGUI_MANAGE_RESTART=false
-    logging:
-      driver: json-file
-      options:
-        max-size: 50m
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Netherlands
+      - SERVERURL=auto #optional
+      - SERVERPORT=51820 #optional
+      - PEERS=10 #optional
+      - PEERDNS=auto #optional
+      - INTERNAL_SUBNET=10.13.13.0 #optional
+      - ALLOWEDIPS=0.0.0.0/0 #optional
     volumes:
-      - ./db:/app/db
-      - /etc/wireguard:/etc/wireguard
+      - ~/wireguard/config:/config
+      - /lib/modules:/lib/modules
+    ports:
+      - 51820:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped

@@ -13,7 +13,7 @@ services:
       - TZ=Europe/Netherlands
       - SERVERURL=auto
       - SERVERPORT=51820
-      - PEERS=10
+      - PEERS=100
       - PEERDNS=auto
       - INTERNAL_SUBNET=10.13.13.0
       - ALLOWEDIPS=0.0.0.0/0

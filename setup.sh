@@ -1,4 +1,4 @@
-apt install git -y
+apt install git python3-pip -y
 
 cd /home/ && git clone https://github.com/russianosint/wireguard-up.git
 
@@ -10,7 +10,7 @@ systemctl enable vpn
 systemctl start vpn
 
 
-python3 -m pip install fastapi uvicorn
+pip3 install fastapi uvicorn
 
 cp /home/wireguard-up/server.service /etc/systemd/system/server.service
 

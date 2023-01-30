@@ -25,9 +25,9 @@ async def allow_address(address: str):
   clean_iptables(address=address)
   subprocess.check_output(f"docker exec -t wireguard iptables -A INPUT -s {address}/32 -j ACCEPT", shell=True)
 
-@app.get('/configs')
-async def get_configs():
-  return {'configs':[file for file in os.listdir('/root/wireguard/config') if file.startswith('peer')]}
+# @app.get('/configs')
+# async def get_configs():
+#   return {'configs':[file for file in os.listdir('/root/wireguard/config') if file.startswith('peer')]}
 
 # @app.get('/generate_peer')
 # async def generate_peer():

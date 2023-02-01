@@ -61,7 +61,9 @@ async def generate(id, input_path):
 
   with open('/root/wireguard/config/wg0.conf', 'w') as f:
     f.write(file.strip())
-  
+
+  subprocess.check_call(args=["qrencode", "-t", "png","-o", f"/config/peer{id}/peer{id}.png",  "-r",  f"/config/peer{id}/peer{id}.conf"])
+
   return await reload_wireguard()
 
 

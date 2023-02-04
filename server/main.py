@@ -1,8 +1,30 @@
 import subprocess
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
+from starlette.middleware.base import BaseHTTPMiddleware
+
+
+class IsAdmin(BaseHTTPMiddleware):
+    def __init__(
+      self,
+      app,
+      token: str,
+    ):
+      super().__init__(app)
+      self.token = token
+
+    async def dispatch(self, request: Request, call_next):
+      if request.client.host not in ['194.87.82.228', ]:
+        return Response(status_code=403)
+
+      response = await call_next(request)
+
+      return response
+
 
 app = FastAPI()
+
+app.add_middleware(IsAdmin, token="token")
 
 async def block(id, input_path):
   presharedkey =  open(f'{input_path}presharedkey-peer{id}').read()
